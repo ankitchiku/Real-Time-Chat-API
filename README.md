@@ -19,7 +19,7 @@ This is a backend API that handles user accounts, authentication, and private me
 
 You have **3 options** to run this project:
 
-### Option 1: Docker (Easiest for Teams) 🐳
+### Option 1: Docker (Easiest for Teams) 
 
 **Prerequisites:** Docker Desktop installed
 
@@ -39,7 +39,7 @@ See `DOCKER-SETUP.md` for details.
 
 ---
 
-### Option 2: Cloud Database (No MySQL Installation) ☁️
+### Option 2: Cloud Database (No MySQL Installation) 
 
 **Prerequisites:** Just Node.js
 
@@ -64,7 +64,7 @@ See `FREE-DATABASE-SETUP.md` or `RAILWAY-DATABASE-SETUP.md` for more options.
 
 ---
 
-### Option 3: Local MySQL (Traditional Way) 💻
+### Option 3: Local MySQL (Traditional Way) 
 
 **Prerequisites:** Node.js + MySQL installed
 
@@ -287,7 +287,3 @@ npm run migrate    # Set up database tables
 - The API enforces that conversations are only between 2 users. If you need group chats, you'll need to modify the Conversation model.
 - Messages are paginated (default 50 per page) to avoid loading too much data at once.
 - User passwords are never returned in API responses - they're always excluded.
-
-## License
-
-MIT - do whatever you want with this code.

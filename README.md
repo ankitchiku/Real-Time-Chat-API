@@ -17,63 +17,83 @@ This is a backend API that handles user accounts, authentication, and private me
 
 ## Getting Started
 
-### What You Need
+You have **3 options** to run this project:
 
-Make sure you have these installed first:
-- Node.js (version 14 or newer)
-- MySQL (version 5.7 or newer)
-- A code editor
-- Postman (optional, for testing)
+### Option 1: Docker (Easiest for Teams) 🐳
 
-### Installation
+**Prerequisites:** Docker Desktop installed
 
-1. Download or clone this project
-
-2. Install all the packages:
 ```bash
+# Clone project
+git clone your-repo-url
+cd chat-api
+
+# Start everything with one command
+docker-compose up
+```
+
+That's it! Everything (MySQL + Node.js) runs automatically.
+Visit: http://localhost:3000/api-docs
+
+See `DOCKER-SETUP.md` for details.
+
+---
+
+### Option 2: Cloud Database (No MySQL Installation) ☁️
+
+**Prerequisites:** Just Node.js
+
+```bash
+# Install dependencies
 npm install
-```
 
-3. Create a MySQL database:
-```sql
-CREATE DATABASE chat_app;
-```
-
-4. Set up your environment variables. Copy the example file:
-```bash
+# Copy environment file (already configured with shared database!)
 cp .env.example .env
-```
 
-Then open `.env` and update it with your actual database credentials:
-```env
-PORT=3000
-NODE_ENV=development
+# Create uploads folder
+mkdir uploads
 
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=your_password
-DB_NAME=chat_app
-
-JWT_SECRET=make_this_a_long_random_string
-JWT_EXPIRE=7d
-```
-
-5. Create the database tables:
-```bash
-npm run migrate
-```
-
-6. Start the server:
-```bash
+# Start server
 npm run dev
 ```
 
-If everything worked, you should see:
+The `.env.example` already has a **shared cloud database** configured!
+Everyone can use the same database - no MySQL installation needed.
+
+See `FREE-DATABASE-SETUP.md` or `RAILWAY-DATABASE-SETUP.md` for more options.
+
+---
+
+### Option 3: Local MySQL (Traditional Way) 💻
+
+**Prerequisites:** Node.js + MySQL installed
+
+```bash
+# Install dependencies
+npm install
+
+# Set your MySQL password in .env
+cp .env.example .env
+# Edit .env: Change DB_PASSWORD to your MySQL password
+
+# Create uploads folder
+mkdir uploads
+
+# Start server (auto-creates database and tables)
+npm run dev
 ```
-Database connection established successfully.
-Server running on port 3000
-API docs available at http://localhost:3000/api-docs
-```
+
+See `QUICK-START.md` for detailed local setup.
+
+---
+
+## Which Option Should I Choose?
+
+- **Team project?** → Use Docker (everyone gets identical setup)
+- **Just learning?** → Use Cloud Database (quickest)
+- **Already have MySQL?** → Use Local MySQL (traditional)
+
+All options auto-create tables and seed sample data!
 
 ## How to Use
 

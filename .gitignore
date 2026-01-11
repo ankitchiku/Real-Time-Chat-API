@@ -1,9 +1,13 @@
-node_modules/
+node_modules
 .env
+.git
+.gitignore
 uploads/*
 !uploads/.gitkeep
-coverage/
 *.log
 .DS_Store
-.vscode/
-.idea/
+coverage
+.vscode
+.idea
+README.md
+*.md

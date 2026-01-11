@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: chatapp_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass123
+      MYSQL_DATABASE: chat_app
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  app:
+    build: .
+    container_name: chatapp_server
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: rootpass123
+      DB_NAME: chat_app
+      DB_PORT: 3306
+      JWT_SECRET: docker_dev_secret_key
+      JWT_EXPIRE: 7d
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./src:/app/src
+      - ./uploads:/app/uploads
+      - /app/node_modules
+
+volumes:
+  mysql_data:

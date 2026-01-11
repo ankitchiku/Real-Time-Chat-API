@@ -5,7 +5,6 @@ class AuthService {
   async register(userData) {
     const { username, email, password, firstName, lastName } = userData;
 
-    // check if user exists
     const existingUser = await User.findOne({
       where: {
         [require('sequelize').Op.or]: [{ email }, { username }]
@@ -16,7 +15,6 @@ class AuthService {
       throw new Error('User with this email or username already exists');
     }
 
-    // create user
     const user = await User.create({
       username,
       email,
@@ -34,14 +32,12 @@ class AuthService {
   }
 
   async login(email, password) {
-    // find user
     const user = await User.findOne({ where: { email } });
 
     if (!user) {
       throw new Error('Invalid credentials');
     }
 
-    // check password
     const isMatch = await user.comparePassword(password);
 
     if (!isMatch) {

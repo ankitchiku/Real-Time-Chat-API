@@ -5,7 +5,6 @@ const Conversation = require('./Conversation')(sequelize);
 const Message = require('./Message')(sequelize);
 const ProfilePicture = require('./ProfilePicture')(sequelize);
 
-// define associations
 User.hasMany(ProfilePicture, { foreignKey: 'userId', as: 'profilePictures' });
 ProfilePicture.belongsTo(User, { foreignKey: 'userId' });
 

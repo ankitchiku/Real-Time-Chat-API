@@ -2,7 +2,6 @@ const { User, Conversation, Message } = require('../models');
 
 async function seedDatabase() {
   try {
-    // Check if data already exists
     const userCount = await User.count();
     
     if (userCount > 0) {
@@ -12,45 +11,43 @@ async function seedDatabase() {
 
     console.log('Seeding database with sample data...');
 
-    // Create sample users
     const users = await User.bulkCreate([
       {
-        username: 'alice_wonder',
-        email: 'alice@example.com',
+        username: 'Ankit',
+        email: 'ankit@example.com',
         password: 'password123',
-        firstName: 'Alice',
-        lastName: 'Wonderland',
+        firstName: 'Ankit',
+        lastName: 'Gupta',
         isActive: true
       },
       {
-        username: 'bob_builder',
-        email: 'bob@example.com',
+        username: 'Cheeku',
+        email: 'cheeku@example.com',
         password: 'password123',
-        firstName: 'Bob',
-        lastName: 'Builder',
+        firstName: 'Cheeku',
+        lastName: 'Gupta',
         isActive: true
       },
       {
-        username: 'charlie_brown',
-        email: 'charlie@example.com',
+        username: 'Harsh',
+        email: 'harsh@example.com',
         password: 'password123',
-        firstName: 'Charlie',
-        lastName: 'Brown',
+        firstName: 'Harsh',
+        lastName: 'Rajput',
         isActive: true
       },
       {
-        username: 'diana_prince',
-        email: 'diana@example.com',
+        username: 'Ashwin',
+        email: 'ashwin@example.com',
         password: 'password123',
-        firstName: 'Diana',
-        lastName: 'Prince',
+        firstName: 'Ashwin',
+        lastName: 'Girdhar',
         isActive: true
       }
     ]);
 
-    console.log(`✅ Created ${users.length} users`);
+    console.log(`Created ${users.length} users`);
 
-    // Create sample conversations
     const conversations = await Conversation.bulkCreate([
       {
         user1Id: users[0].id,
@@ -69,9 +66,8 @@ async function seedDatabase() {
       }
     ]);
 
-    console.log(`✅ Created ${conversations.length} conversations`);
+    console.log(`Created ${conversations.length} conversations`);
 
-    // Create sample messages
     const messages = await Message.bulkCreate([
       {
         conversationId: conversations[0].id,
@@ -105,12 +101,13 @@ async function seedDatabase() {
       }
     ]);
 
-    console.log(`✅ Created ${messages.length} messages`);
-    console.log('\n✨ Database seeded successfully!');
+    console.log(`Created ${messages.length} messages`);
+    console.log('\n Database seeded successfully!');
     console.log('\nSample login credentials:');
-    console.log('Email: alice@example.com | Password: password123');
-    console.log('Email: bob@example.com | Password: password123');
-    console.log('Email: charlie@example.com | Password: password123\n');
+    console.log('Email: ankit@example.com | Password: password123');
+    console.log('Email: cheeku@example.com | Password: password123');
+    console.log('Email: harsh@example.com | Password: password123');
+    console.log('Email: ashwin@example.com | Password: password123\n');
 
   } catch (error) {
     console.error('Error seeding database:', error.message);

@@ -7,10 +7,8 @@ class ConversationService {
       throw new Error('Cannot create conversation with yourself');
     }
 
-    // normalize user IDs so we always store smaller ID as user1
     const [smallerId, largerId] = user1Id < user2Id ? [user1Id, user2Id] : [user2Id, user1Id];
 
-    // check if conversation exists
     let conversation = await Conversation.findOne({
       where: {
         user1Id: smallerId,
@@ -26,13 +24,11 @@ class ConversationService {
       return conversation;
     }
 
-    // create new conversation
     conversation = await Conversation.create({
       user1Id: smallerId,
       user2Id: largerId
     });
 
-    // fetch with user details
     conversation = await Conversation.findByPk(conversation.id, {
       include: [
         { model: User, as: 'user1', attributes: ['id', 'username', 'firstName', 'lastName'] },
@@ -44,7 +40,7 @@ class ConversationService {
   }
 
   async sendMessage(conversationId, senderId, content) {
-    // verify conversation exists and user is part of it
+
     const conversation = await Conversation.findByPk(conversationId);
 
     if (!conversation) {
@@ -55,17 +51,14 @@ class ConversationService {
       throw new Error('You are not part of this conversation');
     }
 
-    // create message
     const message = await Message.create({
       conversationId,
       senderId,
       content
     });
 
-    // update conversation last message time
     await conversation.update({ lastMessageAt: new Date() });
 
-    // fetch message with sender info
     const messageWithSender = await Message.findByPk(message.id, {
       include: [
         { model: User, as: 'sender', attributes: ['id', 'username', 'firstName', 'lastName'] }
@@ -76,7 +69,6 @@ class ConversationService {
   }
 
   async getConversationMessages(conversationId, userId, page = 1, limit = 50) {
-    // verify user is part of conversation
     const conversation = await Conversation.findByPk(conversationId);
 
     if (!conversation) {
@@ -100,7 +92,7 @@ class ConversationService {
     });
 
     return {
-      messages: rows.reverse(), // reverse to show oldest first
+      messages: rows.reverse(), 
       pagination: {
         total: count,
         page,

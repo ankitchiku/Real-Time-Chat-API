@@ -4,7 +4,7 @@ async function setupDatabase() {
   let connection;
   
   try {
-    // First connect without specifying database
+    
     connection = await mysql.createConnection({
       host: process.env.DB_HOST || 'localhost',
       user: process.env.DB_USER || 'root',
@@ -14,12 +14,10 @@ async function setupDatabase() {
 
     console.log('Connected to MySQL server...');
 
-    // Create database if it doesn't exist
     const dbName = process.env.DB_NAME || 'chat_app';
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\``);
     console.log(`Database '${dbName}' ready!`);
 
-    // Use the database
     await connection.query(`USE \`${dbName}\``);
 
     await connection.end();

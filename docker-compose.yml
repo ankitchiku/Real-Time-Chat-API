@@ -38,6 +38,7 @@ services:
     volumes:
       - ./src:/app/src
       - ./uploads:/app/uploads
+      - ./server.js:/app/server.js
       - /app/node_modules
 
 volumes:

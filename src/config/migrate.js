@@ -7,9 +7,7 @@ async function migrate() {
     
     await sequelize.authenticate();
     console.log('Database connected successfully.');
-    
-    // force: false means it won't drop existing tables
-    // alter: true will try to modify existing tables to match models
+ 
     await sequelize.sync({ force: false, alter: true });
     
     console.log('Database migration completed successfully!');

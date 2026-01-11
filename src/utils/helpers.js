@@ -1,7 +1,3 @@
-/**
- * Utility helper functions
- */
-
 const formatResponse = (data, message = 'Success') => {
   return {
     success: true,

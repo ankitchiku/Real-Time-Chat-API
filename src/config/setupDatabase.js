@@ -4,8 +4,10 @@ async function setupDatabase() {
   let connection;
   
   try {
-    
-    connection = await mysql.createConnection({
+  // Debug: print effective DB env values used for connection
+  console.log('setupDatabase: DB_HOST=', process.env.DB_HOST || 'localhost', 'DB_PORT=', process.env.DB_PORT || 3306);
+
+  connection = await mysql.createConnection({
       host: process.env.DB_HOST || 'localhost',
       user: process.env.DB_USER || 'root',
       password: process.env.DB_PASSWORD,

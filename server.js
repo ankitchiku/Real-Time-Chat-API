@@ -1,5 +1,8 @@
 require('dotenv').config();
 const setupEnvironment = require('./src/config/envSetup');
+// Ensure .env is created/loaded and environment overrides are applied
+setupEnvironment();
+
 const app = require('./src/app');
 const { sequelize } = require('./src/models');
 const setupDatabase = require('./src/config/setupDatabase');

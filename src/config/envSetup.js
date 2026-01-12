@@ -18,7 +18,33 @@ function setupEnvironment() {
     }
   }
 
-  require('dotenv').config();
+  // Load .env file first
+  require('dotenv').config({ path: envPath });
+
+  // Ensure certain .env values (DB_* and PORT) override existing system/user env vars.
+  // This helps when a persistent OS env (e.g. DB_PORT=3307) was set previously
+  // but the project .env intentionally sets a different value (e.g. 3306).
+  try {
+    const envFile = fs.readFileSync(envPath, 'utf8');
+    envFile.split(/\r?\n/).forEach(line => {
+      const m = line.match(/^([^#=\s]+)=(.*)$/);
+      if (!m) return;
+      const key = m[1].trim();
+      let val = m[2] || '';
+      val = val.trim();
+      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+        val = val.slice(1, -1);
+      }
+      // Keys we explicitly want to enforce from .env
+      if (['DB_HOST', 'DB_PORT', 'DB_USER', 'DB_PASSWORD', 'DB_NAME', 'PORT'].includes(key)) {
+        process.env[key] = val;
+      }
+    });
+    console.log('Applied DB and PORT variables from .env (overriding system env if present)');
+  } catch (err) {
+    // If reading fails, fallback to dotenv-loaded values (if any)
+    console.error('Could not apply overrides from .env:', err.message);
+  }
 
   const placeholders = [
     'auto_generated_on_first_run',

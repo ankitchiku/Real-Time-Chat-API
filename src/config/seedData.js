@@ -72,13 +72,13 @@ async function seedDatabase() {
       {
         conversationId: conversations[0].id,
         senderId: users[0].id,
-        content: 'Hey Bob! How are you doing?',
+        content: 'Hey Cheeku! How are you doing?',
         isRead: true
       },
       {
         conversationId: conversations[0].id,
         senderId: users[1].id,
-        content: 'Hi Alice! I\'m doing great, thanks for asking!',
+        content: 'Hi Ankit! I\'m doing great, thanks for asking!',
         isRead: true
       },
       {
@@ -90,7 +90,7 @@ async function seedDatabase() {
       {
         conversationId: conversations[1].id,
         senderId: users[0].id,
-        content: 'Charlie, did you finish the project report?',
+        content: 'Harsh, did you finish the project report?',
         isRead: true
       },
       {

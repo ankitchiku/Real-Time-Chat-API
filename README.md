@@ -26,16 +26,17 @@ You have **3 options** to run this project:
 ```bash
 # Clone project
 git clone your-repo-url
-cd chat-api
+cd Real-Time-Chat-API
 
 # Start everything with one command
 docker-compose up
 ```
 
 That's it! Everything (MySQL + Node.js) runs automatically.
-Visit: http://localhost:3000/api-docs
+Visit: http://localhost:3000/api-docs or the postman I have given the json import file in the repositories.
 
-See `DOCKER-SETUP.md` for details.
+set up docker to run the Containers for local use docker desktop and install docker.
+.
 
 ---
 
@@ -83,14 +84,10 @@ mkdir uploads
 npm run dev
 ```
 
-See `QUICK-START.md` for detailed local setup.
-
----
-
 ## Which Option Should I Choose?
 
 - **Team project?** → Use Docker (everyone gets identical setup)
-- **Just learning?** → Use Cloud Database (quickest)
+- **Don't have database** → Use Cloud Database (quickest)
 - **Already have MySQL?** → Use Local MySQL (traditional)
 
 All options auto-create tables and seed sample data!
@@ -104,7 +101,7 @@ The easiest way to test the API is through Swagger. Just open your browser and g
 http://localhost:3000/api-docs
 ```
 
-You can also import the Postman collection (`Chat-API.postman_collection.json`) if you prefer that.
+You can also import the Postman collection (`Real-Time-Chat-API.postman-collection.json`) if you prefer that.
 
 ### Basic Flow
 
@@ -287,3 +284,4 @@ npm run migrate    # Set up database tables
 - The API enforces that conversations are only between 2 users. If you need group chats, you'll need to modify the Conversation model.
 - Messages are paginated (default 50 per page) to avoid loading too much data at once.
 - User passwords are never returned in API responses - they're always excluded.
+- I will add socket.io for real time update in future.
